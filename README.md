@@ -1,1 +1,9 @@
-# Identification-of-Asymmetric-Brain-Regions-in-PET-CT-Using-U-Net-
+# Identification-of-Asymmetric-Brain-Regions-in-PET-CT-Using-U-Net
+
+本研究提出了一种结合 U-Net 融合策略与传统图像处理的 PET/CT 脑部不对称区域识
+别方法。通过“原始图像 + 灰度图像预测交集”的融合分割框架，在训练集 77 例与测试集
+25 例数据上实现了脑部非病灶区精准遮挡与四区域皮层划分，Dice 系数中位数达 0.859，同
+时训练颅骨分割模型，对与后续分析无关的颅骨区域实现分割，Dice 系数中位数达 0.9806，
+较传统方法提升明显；在此基础上，镜像翻转、重心粗对齐与 ECC 精细配准实现左右脑区
+匹配，结合 SUV 差异热力图分析，剔除背景干扰并高亮代谢差异显著区域，最终生成的热
+力图可直观、清晰地反映脑部示踪剂摄取存在显著差异的脑区。
