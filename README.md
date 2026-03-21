@@ -24,10 +24,8 @@
 
 This study presents a method for identifying asymmetric brain regions from PET/CT imaging, which integrates a U-Net fusion strategy with conventional image processing techniques.A fusion segmentation framework based on the “intersection of original and grayscale image predictions” was employed. On a dataset consisting of 77 training and 11 test cases, this framework enabled accurate masking of non-lesion brain regions and parcellation of the cerebral cortex into four subregions, yielding a median Dice coefficient of 0.859.A dedicated skull segmentation model was also trained to exclude skull areas irrelevant to downstream analysis, achieving a median Dice coefficient of 0.9806 and outperforming traditional approaches.Building on these segmentations, left-right brain region matching was accomplished through mirror flipping, coarse centroid alignment, and fine ECC registration. Combined with SUV difference heatmap analysis, background interference was suppressed and regions with prominent metabolic asymmetry were enhanced.The resulting heatmaps provide clear, intuitive visualization of brain regions with substantial discrepancies in tracer uptake.
 
-U-net的训练同原U-net论文训练相同，我们添加一个代码供组预测，即批量预测。
+U-net的训练同原U-net论文训练相同，我们添加一个代码供组预测，即批量预测。我们加上了加法注意力门，旨在提升U-net预测的算法精度，在跳跃连接过程中添加注意力门，而不是简单的通道拼接。
 
-512 原图转灰度批量.py
-读取指定文件夹内的图片，先通过自定义 RGB 通道权重公式将彩色图转换为灰度图（针对性突出特定颜色的边界差异），再采用 CLAHE（对比度受限自适应直方图均衡化）算法增强灰度图的局部对比度，强化边界细节清晰度，最终将处理后的灰度图批量保存至指定输出文件夹。
 交集扩展代码.py
 
 批量处理两个预测掩码文件夹中的同名掩码文件：首先基于对应原图的 RGB 色彩相似度，对每个掩码进行局部区域扩展（将颜色相近的像素纳入掩码前景）；随后对扩展后的两个掩码执行像素级交集运算（仅保留两者共同的前景区域），最终生成并保存高精度的融合后二值掩码至指定文件夹。
